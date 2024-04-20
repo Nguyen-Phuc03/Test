@@ -48,7 +48,11 @@ public class StudentController {
 			model.addAttribute("studentmodel", studentmodel);
 			return "student/createstudent";
 		}
-
+		 if (repo.existsByName(studentmodel.getName())) {
+		        result.addError(new FieldError("studentmodel", "name", "Tên đã tồn tại"));
+		        model.addAttribute("studentmodel", studentmodel);
+		        return "student/createstudent";
+		    }
 		student student = new student();
 		student.setName(studentmodel.getName());
 		student.setAge(studentmodel.getAge());
